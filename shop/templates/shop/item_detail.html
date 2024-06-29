@@ -1,0 +1,76 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+{% load star_tag %}
+
+<main role="main">
+
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h2>{{item.title}}</h2>
+
+                <img src="{{item.photo.url}}" width="120">
+
+                <p>{{item.text}}</p>
+
+                <form method="post" action="./cart/">
+                    <input type="hidden" name="csrfmiddlewaretoken"
+                           value="N4vcBqzjoYkU7OTDuAT8hq8srpvYX44nJsswuP7e3EYg0Hq8DgxuR0eiXWbSr5RZ">
+                    <input type="hidden" name="merchandise_id" value="1">
+                    <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+                </form>
+            </div>
+        </div>
+        {% if item.reviews.count > 0 %}
+        <hr>
+        {% for review in item.reviews.all %}
+        {{review.star|get_star}} <span>{{review.name}}</span>
+        <p>{{review.text}}</p>
+        {% endfor %}
+        <hr>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <h4>Оставте отзыв:</h4>
+                <form action="{% url 'add_review' item_id=item.id %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="{{forms.text.id_for_label}}">{{forms.name.label}}</label>
+                        {{forms.name}}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{forms.text.id_for_label}}">{{forms.text.label}}</label>
+                        {{forms.text}}
+                    </div>
+
+
+                    {% for radio in forms.star %}
+                    <div class="form-check">
+                        {{ radio.tag }}
+                        <label for="{{ radio.id_for_label }}" class="form-check-label">{{ radio.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary">Оставить</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+</main>
+
+<script src="./static/jquery-3.3.1.slim.min.js"></script>
+<script src="./static/popper.min.js"></script>
+<script src="./static/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+{% endblock %}

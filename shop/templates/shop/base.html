@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>My dip</title>
+    <link rel="stylesheet" href="{% static 'shop/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/main.css' %}">
+</head>
+
+<body class="" data-gr-c-s-loaded="true">
+
+{% include 'shop/navbar.html' with categories=categories %}
+
+<main role="main">
+
+    {% block content %}
+    <div class="alert alert-dark" role="alert">
+        Тут пока ничего нет!
+    </div>
+    {% endblock %}
+
+</main>
+<hr>
+<footer class="container">
+    <p>© Мотоленд 2024</p>
+</footer>
+
+<script src="{% static 'shop/jquery-3.3.1.slim.min.js' %}"></script>
+<script src="{% static 'shop/popper.min.js' %}"></script>
+<script src="{% static 'shop/bootstrap.min.js' %}"></script>
+</body>
+</html>

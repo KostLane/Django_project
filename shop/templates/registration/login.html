@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>My dip</title>
+    <link rel="stylesheet" href="{% static 'shop/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/shop/main.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/login.css' %}">
+</head>
+<body class="text-center" data-gr-c-s-loaded="true">
+
+<form method="post" action="{% url 'login' %}" class="form-signin">
+    <input type="hidden" name="next" value="{% url 'mainpage' %}">
+    {% csrf_token %}
+    <img class="mb-4" src="{% static 'shop/logo.svg' %}" alt="" width="72" height="72">
+
+
+    <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
+
+
+    <label for="{{form.username.id_for_label}}" class="sr-only">Email</label>
+    <input type='email' id="{{form.username.id_for_label}}" class="form-control" placeholder="Email"
+           name="username"
+           value="" required="" autofocus="" data-cip-id="inputEmail">
+
+    <label for="{{form.password.id_for_label}}" class="sr-only">Password</label>
+    <input type="password" id="{{form.password.id_for_label}}" class="form-control" placeholder="Пароль"
+           name="password" required="" data-cip-id="inputPassword">
+
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+    <p class="mt-5 mb-3 text-muted">© МОТОЛЕНД 2024</p>
+{{ form.non_field_errors }}
+</form>
+
+<script src="./static/jquery-3.3.1.slim.min.js"></script>
+<script src="./static/popper.min.js"></script>
+<script src="./static/bootstrap.min.js"></script>
+</body>
+</html>

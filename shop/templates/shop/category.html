@@ -1,0 +1,45 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<div class="container">
+
+    {% if not items %}
+    <div class="alert alert-dark" role="alert">
+        Тут пока ничего нет!
+    </div>
+    {% else %}
+    <h1>{{cat.title}}</h1>
+
+    <div class="row">
+
+        {% for item in items %}
+        {% include 'shop/item.html' with item=item %}
+        {% empty %}
+
+        {% endfor %}
+
+    </div>
+    {%endif%}
+
+
+    {% if items.has_next  or items.has_previous%}
+    <div class="pagination">
+    <span class="step-links">
+        {% if items.has_previous %}
+            <a href="?page=1">&laquo; первая</a>
+            <a href="?page={{ items.previous_page_number }}">предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ items.number }} из {{ items.paginator.num_pages }}.
+        </span>
+
+        {% if items.has_next %}
+            <a href="?page={{ items.next_page_number }}">следующая</a>
+            <a href="?page={{ items.paginator.num_pages }}">последняя &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

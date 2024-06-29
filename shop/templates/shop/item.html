@@ -1,0 +1,10 @@
+{% load static %}
+<div class="col-md-4">
+    <h2>{{item.title}}</h2>
+    <a href="{% url 'item_detail' id=item.id %}">
+        <img src="{{item.photo.url}}" width="180">
+    </a>
+    <form action="{% url 'to_basket' item_id=item.id %}" method="get">
+        <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+    </form>
+</div>
